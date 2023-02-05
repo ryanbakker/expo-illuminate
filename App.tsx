@@ -1,11 +1,43 @@
 import { StatusBar } from "expo-status-bar";
 import { SafeAreaView, Text } from "react-native";
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import HomeScreen from "./screens/HomeScreen";
+import PaywallScreen from "./screens/Paywall";
+
+export type RootStackParamList = {
+  Home: undefined;
+  Paywall: undefined;
+  Demo: undefined;
+};
+
+const Stack = createNativeStackNavigator<RootStackParamList>();
 
 export default function App() {
   return (
-    <SafeAreaView>
-      <Text>News App</Text>
-      <StatusBar style="auto" />
-    </SafeAreaView>
+    <NavigationContainer>
+      <Stack.Navigator>
+        {/* Home Screen */}
+        <Stack.Screen
+          options={{ headerShown: false }}
+          name="Home"
+          component={HomeScreen}
+        />
+
+        {/* News Article Screen */}
+
+        {/* Paywall Screen */}
+        <Stack.Screen
+          options={{
+            headerShown: false,
+            presentation: "modal",
+          }}
+          name="Paywall"
+          component={PaywallScreen}
+        />
+
+        {/* Login Screen */}
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
